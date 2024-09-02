@@ -74,6 +74,7 @@ struct ContentView: View {
         roundNumber += 1
         if (roundNumber == 10) {
             showingAlert = true
+            roundNumber = 1
         }
     }
 
