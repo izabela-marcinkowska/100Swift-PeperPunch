@@ -12,27 +12,29 @@ var result = ""
 struct ContentView: View {
     @State private var userChoice = ""
     @State private var computersChoice = ""
+    @State private var roundNumber = 1
     
     var body: some View {
         VStack {
             Button {
                 userChoice = "scissors"
                 computersChoice = getComputerChoice(choices)
-                playGame(choice: userChoice, computersChoice: computersChoice)
+                playGame(choice: userChoice, computersChoice: computersChoice, round: roundNumber)
+                
             } label: {
                 Text("scissors")
             }
             Button {
                 userChoice = "paper"
                 computersChoice = getComputerChoice(choices)
-                playGame(choice: userChoice, computersChoice: computersChoice)
+                playGame(choice: userChoice, computersChoice: computersChoice, round: roundNumber)
             } label: {
                 Text("paper")
             }
             Button {
                 userChoice = "rock"
                 computersChoice = getComputerChoice(choices)
-                playGame(choice: userChoice, computersChoice: computersChoice)
+                playGame(choice: userChoice, computersChoice: computersChoice, round: roundNumber)
             } label: {
                 Text("rock")
             }
@@ -40,15 +42,17 @@ struct ContentView: View {
             Text("Computer Choice is \(computersChoice)")
             Text("User Choice is \(userChoice)")
             Text("Result \(result)")
+            Text("Round \(roundNumber)")
             Button {
                 userChoice = ""
                 computersChoice = ""
+                roundNumber = 1
             } label: {
                 Text("play again")
             }
         }
     }
-    func playGame (choice: String, computersChoice: String) -> Void {
+    func playGame (choice: String, computersChoice: String, round: Int) -> Void {
         if (choice == "rock" && computersChoice == "paper") {
             result = "you loose"
         } else if (choice == "paper" && computersChoice == "rock") {
@@ -64,6 +68,7 @@ struct ContentView: View {
         } else {
             result = "tie"
         }
+        roundNumber += 1
     }
 
 }
