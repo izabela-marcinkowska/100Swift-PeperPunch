@@ -11,40 +11,44 @@ let choices = ["scissors", "paper", "rock"]
 var result = ""
 struct ContentView: View {
     @State private var userChoice = ""
+    @State private var computersChoice = ""
     
     var body: some View {
         VStack {
             Button {
                 userChoice = "scissors"
-                playGame(choice: userChoice)
+                computersChoice = getComputerChoice(choices)
+                playGame(choice: userChoice, computersChoice: computersChoice)
             } label: {
                 Text("scissors")
             }
             Button {
                 userChoice = "paper"
-                playGame(choice: userChoice)
+                computersChoice = getComputerChoice(choices)
+                playGame(choice: userChoice, computersChoice: computersChoice)
             } label: {
                 Text("paper")
             }
             Button {
                 userChoice = "rock"
-                playGame(choice: userChoice)
+                computersChoice = getComputerChoice(choices)
+                playGame(choice: userChoice, computersChoice: computersChoice)
             } label: {
                 Text("rock")
             }
             
-            Text("Computer Choice is \(getComputerChoice(choices))")
+            Text("Computer Choice is \(computersChoice)")
             Text("User Choice is \(userChoice)")
             Text("Result \(result)")
             Button {
                 userChoice = ""
+                computersChoice = ""
             } label: {
                 Text("play again")
             }
         }
     }
-    func playGame (choice: String) -> Void {
-        var computersChoice = getComputerChoice(choices)
+    func playGame (choice: String, computersChoice: String) -> Void {
         if (choice == "rock" && computersChoice == "paper") {
             result = "you loose"
         } else if (choice == "paper" && computersChoice == "rock") {
