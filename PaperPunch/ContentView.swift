@@ -9,15 +9,29 @@ import SwiftUI
 
 struct ContentView: View {
     let choices = ["scissors", "papper", "rock"]
-
+    @State var userChoice = ""
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text(getComputerChoice(choices))
+            Button {
+                userChoice = "scissors"
+            } label: {
+                Text("scissors")
+            }
+            Button {
+                userChoice = "paper"
+            } label: {
+                Text("paper")
+            }
+            Button {
+                userChoice = "rock"
+            } label: {
+                Text("rock")
+            }
+            
+            Text("Computer Choice is \(getComputerChoice(choices))")
+            Text("User Choice is \(userChoice)")
         }
-        .padding()
     }
 }
 
