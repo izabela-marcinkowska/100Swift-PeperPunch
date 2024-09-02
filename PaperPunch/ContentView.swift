@@ -8,15 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    let choices = ["scissors", "papper", "rock"]
+
     var body: some View {
         VStack {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text(getComputerChoice(choices))
         }
         .padding()
     }
+}
+
+func getComputerChoice (_ choices: [String]) -> String {
+    choices.randomElement()!
 }
 
 #Preview {
