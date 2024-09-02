@@ -13,6 +13,7 @@ struct ContentView: View {
     @State private var userChoice = ""
     @State private var computersChoice = ""
     @State private var roundNumber = 1
+    @State private var showingAlert = false
     
     var body: some View {
         VStack {
@@ -50,6 +51,8 @@ struct ContentView: View {
             } label: {
                 Text("play again")
             }
+        }.alert("End of game", isPresented: $showingAlert) {
+            Button("Ok") {}
         }
     }
     func playGame (choice: String, computersChoice: String, round: Int) -> Void {
@@ -69,6 +72,9 @@ struct ContentView: View {
             result = "tie"
         }
         roundNumber += 1
+        if (roundNumber == 10) {
+            showingAlert = true
+        }
     }
 
 }
