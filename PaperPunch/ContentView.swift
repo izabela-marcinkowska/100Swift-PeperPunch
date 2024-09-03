@@ -14,12 +14,12 @@ struct ContentView: View {
     @State private var computersChoice = ""
     @State private var roundNumber = 1
     @State private var showingAlert = false
+    @State private var points = 0
     
     var body: some View {
         NavigationStack{
-            
-            
             VStack {
+                Spacer()
                 Spacer()
                 VStack{
                     Button {
@@ -60,6 +60,7 @@ struct ContentView: View {
                         Text("Result").foregroundStyle(.gray).font(.largeTitle)
                     }
                     Text("Round \(roundNumber)/10").font(.title3)
+                    Text("Points: \(points)").font(.title3)
                     Text("Computer chooses:").font(.title2).italic()
                     Spacer()
                     FlagImage(picture: computersChoice + "-computer")
@@ -74,7 +75,9 @@ struct ContentView: View {
                     }
                 }
             }.alert("End of game", isPresented: $showingAlert) {
-                Button("Ok") {}
+                Button("Try again"){}
+            } message: {
+                Text("You got \(points) points")
             }
         }
     }
@@ -83,14 +86,17 @@ struct ContentView: View {
             result = "loose"
         } else if (choice == "paper" && computersChoice == "rock") {
             result = "win"
+            points += 1
         } else if (choice == "scissors" && computersChoice == "rock") {
             result = "loose"
         } else if (choice == "rock" && computersChoice == "scissors") {
             result = "win"
+            points += 1
         } else if (choice == "paper" && computersChoice == "scissors") {
             result = "loose"
         } else if (choice == "scissors" && computersChoice == "paper") {
             result = "win"
+            points += 1
         } else {
             result = "tie"
         }
