@@ -23,21 +23,24 @@ struct ContentView: View {
                 playGame(choice: userChoice, computersChoice: computersChoice, round: roundNumber)
                 
             } label: {
-                Text("scissors")
+                FlagImage(picture: "scissors-user")
             }
+            HStack {
+                
             Button {
                 userChoice = "paper"
                 computersChoice = getComputerChoice(choices)
                 playGame(choice: userChoice, computersChoice: computersChoice, round: roundNumber)
             } label: {
-                Text("paper")
+                FlagImage(picture: "rock-user")
             }
             Button {
                 userChoice = "rock"
                 computersChoice = getComputerChoice(choices)
                 playGame(choice: userChoice, computersChoice: computersChoice, round: roundNumber)
             } label: {
-                Text("rock")
+                FlagImage(picture: "paper-user")
+            }
             }
             
             Text("Computer Choice is \(computersChoice)")
@@ -82,6 +85,15 @@ struct ContentView: View {
 
 func getComputerChoice (_ choices: [String]) -> String {
     choices.randomElement()!
+}
+struct FlagImage: View {
+    var picture: String
+    var body: some View {
+        Image(picture)
+            .resizable()
+            .frame(width: 160.0, height: 150.0)
+            .shadow(radius: 5)
+    }
 }
 
 
