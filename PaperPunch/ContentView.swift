@@ -23,7 +23,7 @@ struct ContentView: View {
                 playGame(choice: userChoice, computersChoice: computersChoice, round: roundNumber)
                 
             } label: {
-                FlagImage(picture: "scissors-user")
+                FlagImage(picture: "scissors-user").shadow(color: (userChoice + "-user" == "scissors-user" ? .red : .black), radius: 10)
             }
             HStack {
                 
@@ -32,18 +32,20 @@ struct ContentView: View {
                 computersChoice = getComputerChoice(choices)
                 playGame(choice: userChoice, computersChoice: computersChoice, round: roundNumber)
             } label: {
-                FlagImage(picture: "rock-user")
+                FlagImage(picture: "paper-user").shadow(color: (userChoice + "-user" == "paper-user" ? .red : .black), radius: 10)
             }
             Button {
                 userChoice = "rock"
                 computersChoice = getComputerChoice(choices)
                 playGame(choice: userChoice, computersChoice: computersChoice, round: roundNumber)
             } label: {
-                FlagImage(picture: "paper-user")
+                FlagImage(picture: "rock-user").shadow(color: (userChoice + "-user" == "rock-user" ? .red : .black), radius: 10)
             }
             }
             
-            Text("Computer Choice is \(computersChoice)")
+            Text("Computer Choice is:")
+            FlagImage(picture: computersChoice + "-computer")
+            
             Text("User Choice is \(userChoice)")
             Text("Result \(result)")
             Text("Round \(roundNumber)")
@@ -80,20 +82,20 @@ struct ContentView: View {
             roundNumber = 1
         }
     }
+    struct FlagImage: View {
+        var picture: String
+        var body: some View {
+            Image(picture)
+                .resizable()
+                .frame(width: 160.0, height: 150.0)
+                .shadow(radius: 5)
+        }
+    }
 
 }
 
 func getComputerChoice (_ choices: [String]) -> String {
     choices.randomElement()!
-}
-struct FlagImage: View {
-    var picture: String
-    var body: some View {
-        Image(picture)
-            .resizable()
-            .frame(width: 160.0, height: 150.0)
-            .shadow(radius: 5)
-    }
 }
 
 
