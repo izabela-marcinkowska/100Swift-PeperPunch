@@ -23,7 +23,7 @@ struct ContentView: View {
                 playGame(choice: userChoice, computersChoice: computersChoice, round: roundNumber)
                 
             } label: {
-                FlagImage(picture: "scissors-user").shadow(color: (userChoice + "-user" == "scissors-user" ? .red : .black), radius: 10)
+                FlagImage(picture: "scissors-user").shadow(color: (userChoice + "-user" == "scissors-user" ? .green : .black), radius: 10)
             }
             HStack {
                 
@@ -32,22 +32,27 @@ struct ContentView: View {
                 computersChoice = getComputerChoice(choices)
                 playGame(choice: userChoice, computersChoice: computersChoice, round: roundNumber)
             } label: {
-                FlagImage(picture: "paper-user").shadow(color: (userChoice + "-user" == "paper-user" ? .red : .black), radius: 10)
+                FlagImage(picture: "paper-user").shadow(color: (userChoice + "-user" == "paper-user" ? .green : .black), radius: 10)
             }
             Button {
                 userChoice = "rock"
                 computersChoice = getComputerChoice(choices)
                 playGame(choice: userChoice, computersChoice: computersChoice, round: roundNumber)
             } label: {
-                FlagImage(picture: "rock-user").shadow(color: (userChoice + "-user" == "rock-user" ? .red : .black), radius: 10)
+                FlagImage(picture: "rock-user").shadow(color: (userChoice + "-user" == "rock-user" ? .green : .black), radius: 10)
             }
             }
             
             Text("Computer Choice is:")
             FlagImage(picture: computersChoice + "-computer")
-            
-            Text("User Choice is \(userChoice)")
-            Text("Result \(result)")
+        
+            if (result == "tie") {
+                Text("Tie").foregroundStyle(.orange).font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+            } else if (result == "win") {
+                Text("Win").foregroundStyle(.green).font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+            } else if (result == "loose") {
+                Text("Lose").foregroundStyle(.red).font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+            }
             Text("Round \(roundNumber)")
             Button {
                 userChoice = ""
@@ -62,17 +67,17 @@ struct ContentView: View {
     }
     func playGame (choice: String, computersChoice: String, round: Int) -> Void {
         if (choice == "rock" && computersChoice == "paper") {
-            result = "you loose"
+            result = "loose"
         } else if (choice == "paper" && computersChoice == "rock") {
-            result = "you win"
+            result = "win"
         } else if (choice == "scissors" && computersChoice == "rock") {
-            result = "you loose"
+            result = "loose"
         } else if (choice == "rock" && computersChoice == "scissors") {
-            result = "you win"
+            result = "win"
         } else if (choice == "paper" && computersChoice == "scissors") {
-            result = "you loose"
+            result = "loose"
         } else if (choice == "scissors" && computersChoice == "paper") {
-            result = "you win"
+            result = "win"
         } else {
             result = "tie"
         }
@@ -91,6 +96,12 @@ struct ContentView: View {
                 .shadow(radius: 5)
         }
     }
+    
+    var tie: some View {
+        Text("Tie").foregroundStyle(.black).font(.title)
+    }
+    
+
 
 }
 
