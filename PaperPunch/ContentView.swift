@@ -17,69 +17,73 @@ struct ContentView: View {
     @State private var points = 0
     
     var body: some View {
-        NavigationStack{
-            VStack {
-                Spacer()
-                Spacer()
-                VStack{
+        VStack(alignment: .leading, spacing: 0) {
+            Text("\(roundNumber)/10").padding(.top, 20).font(.title)
+        }.frame(maxWidth: .infinity, alignment: .leading)
+            .ignoresSafeArea()
+            .padding(.leading, 45)
+        
+        VStack {
+            Spacer()
+            Spacer()
+            VStack{
+                Button {
+                    userChoice = "scissors"
+                    computersChoice = getComputerChoice(choices)
+                    playGame(choice: userChoice, computersChoice: computersChoice, round: roundNumber)
+                    
+                } label: {
+                    FlagImage(picture: "scissors-user").shadow(color: (userChoice + "-user" == "scissors-user" ? .green : .black), radius: 10)
+                }
+                HStack {
                     Button {
-                        userChoice = "scissors"
+                        userChoice = "paper"
                         computersChoice = getComputerChoice(choices)
                         playGame(choice: userChoice, computersChoice: computersChoice, round: roundNumber)
-                        
                     } label: {
-                        FlagImage(picture: "scissors-user").shadow(color: (userChoice + "-user" == "scissors-user" ? .green : .black), radius: 10)
+                        FlagImage(picture: "paper-user").shadow(color: (userChoice + "-user" == "paper-user" ? .green : .black), radius: 10)
                     }
-                    HStack {
-                        Button {
-                            userChoice = "paper"
-                            computersChoice = getComputerChoice(choices)
-                            playGame(choice: userChoice, computersChoice: computersChoice, round: roundNumber)
-                        } label: {
-                            FlagImage(picture: "paper-user").shadow(color: (userChoice + "-user" == "paper-user" ? .green : .black), radius: 10)
-                        }
-                        Button {
-                            userChoice = "rock"
-                            computersChoice = getComputerChoice(choices)
-                            playGame(choice: userChoice, computersChoice: computersChoice, round: roundNumber)
-                        } label: {
-                            FlagImage(picture: "rock-user").shadow(color: (userChoice + "-user" == "rock-user" ? .green : .black), radius: 10)
-                        }
+                    Button {
+                        userChoice = "rock"
+                        computersChoice = getComputerChoice(choices)
+                        playGame(choice: userChoice, computersChoice: computersChoice, round: roundNumber)
+                    } label: {
+                        FlagImage(picture: "rock-user").shadow(color: (userChoice + "-user" == "rock-user" ? .green : .black), radius: 10)
                     }
-                    Spacer()
                 }
                 Spacer()
-                VStack {
-                    if (result == "tie") {
-                        Text("Tie").foregroundStyle(.orange).font(.largeTitle)
-                    } else if (result == "win") {
-                        Text("Win").foregroundStyle(.green).font(.largeTitle)
-                    } else if (result == "loose") {
-                        Text("Lose").foregroundStyle(.red).font(.largeTitle)
-                    } else {
-                        Text("Result").foregroundStyle(.gray).font(.largeTitle)
-                    }
-                    Text("Round \(roundNumber)/10").font(.title3)
-                    Text("Points: \(points)").font(.title3)
-                    Text("Computer chooses:").font(.title2).italic()
-                    Spacer()
-                    FlagImage(picture: computersChoice + "-computer")
-                    
-                    Spacer()
-                    Button {
-                        userChoice = ""
-                        computersChoice = ""
-                        roundNumber = 1
-                    } label: {
-                        Text("Try again")
-                    }
-                }
-            }.alert("End of game", isPresented: $showingAlert) {
-                Button("Try again"){}
-            } message: {
-                Text("You got \(points) points")
             }
+            Spacer()
+            VStack {
+                if (result == "tie") {
+                    Text("Tie").foregroundStyle(.orange).font(.largeTitle)
+                } else if (result == "win") {
+                    Text("Win").foregroundStyle(.green).font(.largeTitle)
+                } else if (result == "loose") {
+                    Text("Lose").foregroundStyle(.red).font(.largeTitle)
+                } else {
+                    Text("Result").foregroundStyle(.gray).font(.largeTitle)
+                }
+                Text("Points: \(points)").font(.title3)
+                Text("Computer chooses:").font(.title2).italic()
+                Spacer()
+                FlagImage(picture: computersChoice + "-computer")
+                
+                Spacer()
+                Button {
+                    userChoice = ""
+                    computersChoice = ""
+                    roundNumber = 1
+                } label: {
+                    Text("Try again")
+                }
+            }
+        }.alert("End of game", isPresented: $showingAlert) {
+            Button("Try again"){}
+        } message: {
+            Text("You got \(points) points")
         }
+        
     }
     func playGame (choice: String, computersChoice: String, round: Int) -> Void {
         if (choice == "rock" && computersChoice == "paper") {
