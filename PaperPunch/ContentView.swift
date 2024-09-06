@@ -79,7 +79,9 @@ struct ContentView: View {
                 }
             }
         }.alert("End of game", isPresented: $showingAlert) {
-            Button("Try again"){}
+            Button("Try again"){
+                resetPoints()
+            }
         } message: {
             Text("You got \(points) points")
         }
@@ -124,6 +126,9 @@ struct ContentView: View {
         Text("Tie").foregroundStyle(.black).font(.largeTitle)
     }
     
+    func resetPoints () -> Void {
+        points = 0
+    }
     
     
 }
