@@ -64,8 +64,8 @@ struct ContentView: View {
                 } else {
                     Text("Result").foregroundStyle(.gray).font(.largeTitle)
                 }
-                Text("Points: \(points)").font(.title3)
-                Text("Computer chooses:").font(.title2).italic()
+                Text("Points: \(points)").font(.title2)
+                Text("Computer chooses:").font(.title3).italic()
                 Spacer()
                 FlagImage(picture: computersChoice + "-computer")
                 
@@ -120,10 +120,6 @@ struct ContentView: View {
                 .frame(width: 160.0, height: 150.0)
                 .shadow(radius: 5)
         }
-    }
-    
-    var tie: some View {
-        Text("Tie").foregroundStyle(.black).font(.largeTitle)
     }
     
     func resetPoints () -> Void {
