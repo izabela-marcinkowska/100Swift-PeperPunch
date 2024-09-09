@@ -17,16 +17,11 @@ struct ContentView: View {
     @State private var points = 0
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text("\(roundNumber)/10").padding(.top, 20).font(.title)
-        }.frame(maxWidth: .infinity, alignment: .leading)
-            .ignoresSafeArea()
-            .padding(.leading, 45)
-        
         VStack {
             Spacer()
             Spacer()
             VStack{
+                
                 Button {
                     userChoice = "scissors"
                     computersChoice = getComputerChoice(choices)
@@ -65,10 +60,11 @@ struct ContentView: View {
                     Text("Result").foregroundStyle(.gray).font(.largeTitle)
                 }
                 Text("Points: \(points)").font(.title2)
-                Text("Computer chooses:").font(.title3).italic()
+               
                 Spacer()
+                Text("Computer chooses:").font(.title3).italic()
                 FlagImage(picture: computersChoice + "-computer")
-                
+                Text("Round: \(roundNumber)/10").font(.title3)
                 Spacer()
                 Button {
                     userChoice = ""
